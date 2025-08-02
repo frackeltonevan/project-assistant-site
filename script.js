@@ -31,7 +31,7 @@ function confirmPlan() {
   const status = document.getElementById('status');
   status.innerText = "⏳ Finalizing plan...";
 
-  fetch('https://us-west1-project-assistant-cloud.cloudfunctions.net/plan-aiE', {
+  fetch('https://us-west1-project-assistant-cloud.cloudfunctions.net/plan-ai', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,3 +48,4 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+

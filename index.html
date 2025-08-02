@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Project Planner Assistant</h1>
+    <textarea id="prompt" placeholder="Describe your project here..."></textarea>
+    <button onclick="submitPrompt()">Submit</button>
+
+    <div id="preview-box" style="display:none;">
+      <h3>Plan Preview</h3>
+      <pre id="preview-text"></pre>
+      <button onclick="confirmPlan()">Approve and Schedule</button>
+    </div>
+
+    <p id="status"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

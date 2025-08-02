@@ -6,11 +6,10 @@ function submitPrompt() {
   const status = document.getElementById('status');
   status.innerText = "🔄 Processing...";
 
-  fetch('https://YOUR_CLOUD_FUNCTION_URL_HERE', {
+  fetch('https://us-west1-project-assistant-cloud.cloudfunctions.net/plan-ai', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-access-token': 'YOUR_SECRET_TOKEN'
     },
     body: JSON.stringify({ prompt: prompt, mode: 'preview' })
   })
@@ -32,11 +31,10 @@ function confirmPlan() {
   const status = document.getElementById('status');
   status.innerText = "⏳ Finalizing plan...";
 
-  fetch('https://YOUR_CLOUD_FUNCTION_URL_HERE', {
+  fetch('https://us-west1-project-assistant-cloud.cloudfunctions.net/plan-aiE', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-access-token': 'YOUR_SECRET_TOKEN'
     },
     body: JSON.stringify({ ...lastPayload, mode: 'confirm' })
   })

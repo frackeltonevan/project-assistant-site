@@ -13,17 +13,22 @@ function submitPrompt() {
     },
     body: JSON.stringify({ prompt: prompt, mode: 'preview' })
   })
-  .then(res => res.json())
-  .then(data => {
-    lastPayload = data;
-    document.getElementById('preview-text').innerText = data.calendar_preview;
-    document.getElementById('preview-box').style.display = 'block';
-    status.innerText = "✅ Preview generated. Review below.";
-  })
-  .catch(err => {
-    console.error(err);
-    status.innerText = "❌ Failed to generate preview.";
-  });
+  .then(async res => {
+  const json = await res.json();
+  console.log("Preview response:", json);
+  if (json.error) throw new Error(json.error);
+  return json;
+})
+.then(data => {
+  lastPayload = data;
+  document.getElementById('preview-text').innerText = data.calendar_preview;
+  document.getElementById('preview-box').style.display = 'block';
+  status.innerText = "✅ Preview generated. Review below.";
+})
+.catch(err => {
+  console.error("Preview failed:", err);
+  status.innerText = "❌ Failed to generate preview.";
+});
 }
 
 // Finalize the plan
@@ -48,4 +53,5 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
 

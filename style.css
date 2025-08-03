@@ -36,13 +36,6 @@ button {
   margin-top: 10px;
 }
 
-#preview-text {
-  white-space: pre-wrap;  /* Keep line breaks */
-  word-wrap: break-word;  /* Break long words if needed */
-  max-width: 100%;        /* Don't overflow container */
-}
-
-
 button:hover {
   background-color: #0056b3;
 }
@@ -53,4 +46,11 @@ button:hover {
   background: #f1f1f1;
   border-left: 4px solid #007bff;
 }
+
+#preview-text {
+  white-space: pre-wrap;  /* Keep line breaks */
+  word-wrap: break-word;  /* Break long words if needed */
+  max-width: 100%;        /* Don't overflow container */
+}
+
 

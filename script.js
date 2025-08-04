@@ -21,7 +21,9 @@ function submitPrompt() {
 })
 .then(data => {
   lastPayload = data;
-  document.getElementById('preview-text').innerText = data.calendar_preview;
+  // Show full JSON response for debugging
+  document.getElementById('preview-text').innerText = JSON.stringify(data, null, 2);
+
   document.getElementById('preview-box').style.display = 'block';
   status.innerText = "✅ Preview generated. Review below.";
 })
@@ -53,5 +55,6 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
 
 

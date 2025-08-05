@@ -33,8 +33,8 @@ function submitPrompt() {
   Missing Tools: ${data.missing_tools.join(", ")}`;
   }
 
-// Display it all at once
-document.getElementById('preview-text').innerText = previewContent;
+  // Display it all at once
+  document.getElementById('preview-text').innerText = previewContent;
 
 
 
@@ -69,6 +69,7 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
 
 
 

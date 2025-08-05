@@ -21,8 +21,19 @@ function submitPrompt() {
 })
 .then(data => {
   lastPayload = data;
-  // Show full JSON response for debugging
-  document.getElementById('preview-text').innerText = JSON.stringify(data, null, 2);
+  
+  // disiplay plan preview
+  document.getElementById('preview-text').innerText = data.summary;
+  document.getElementById('preview-text').innerText = data.estimated_date;
+  document.getElementById('preview-text').innerText = data.calendar_preview;
+  document.getElementById('preview-text').innerText = data.type;
+  
+  if (data.type == "project") { 
+    document.getElementById('preview-text').innerText = data.tools;
+    document.getElementById('preview-text').innerText = data.missing_tools;
+  }
+
+
 
   document.getElementById('preview-box').style.display = 'block';
   status.innerText = "✅ Preview generated. Review below.";
@@ -55,6 +66,7 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
 
 
 

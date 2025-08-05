@@ -22,19 +22,19 @@ function submitPrompt() {
 .then(data => {
   lastPayload = data;
   
-  // disiplay plan preview
-  let previewContent = `Summary: ${data.summary}
-  Estimated Date: ${data.estimated_date}
-  Type: ${data.type}
-  Calendar Preview: ${data.calendar_preview}`;
+  let previewContent = 
+    `Summary: ${data.summary || "N/A"}\n` +
+    `Estimated Date: ${data.estimated_date || "N/A"}\n` +
+    `Type: ${data.type || "N/A"}\n` +
+    `Calendar Preview: ${data.calendar_preview || "N/A"}`;
 
   if (data.type === "project") {
-    previewContent += `\nTools: ${data.tools.join(", ")}
-  Missing Tools: ${data.missing_tools.join(", ")}`;
+    previewContent += `\nTools: ${Array.isArray(data.tools) ? data.tools.join(", ") : "N/A"}\n`;
+    previewContent += `Missing Tools: ${Array.isArray(data.missing_tools) ? data.missing_tools.join(", ") : "N/A"}`;
   }
 
-  // Display it all at once
   document.getElementById('preview-text').innerText = previewContent;
+
 
 
 
@@ -69,6 +69,7 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
 
 
 

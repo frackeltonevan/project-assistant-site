@@ -14,37 +14,37 @@ function submitPrompt() {
     body: JSON.stringify({ prompt: prompt, mode: 'preview' })
   })
   .then(async res => {
-  const json = await res.json();
-  console.log("Preview response:", json);
-  if (json.error) throw new Error(json.error);
-  return json;
-})
-.then(data => {
-  lastPayload = data;
-  
-  let previewContent = 
-    `Summary: ${data.summary || "N/A"}\n` +
-    `Estimated Date: ${data.estimated_date || "N/A"}\n` +
-    `Type: ${data.type || "N/A"}\n` +
-    `Calendar Preview: ${data.calendar_preview || "N/A"}`;
+    const json = await res.json();
+    console.log("Preview response:", json);
+    if (json.error) throw new Error(json.error);
+    return json;
+  })
+  .then(data => {
+    lastPayload = data;
 
-  if (data.type === "project") {
-    previewContent += `\nTools: ${Array.isArray(data.tools) ? data.tools.join(", ") : "N/A"}\n`;
-    previewContent += `Missing Tools: ${Array.isArray(data.missing_tools) ? data.missing_tools.join(", ") : "N/A"}`;
-  }
+    // Build preview in your original order
+    let previewContent = "";
+    previewContent += `Summary: ${data.summary || "N/A"}\n`;
+    previewContent += `Estimated Date: ${data.estimated_date || "N/A"}\n`;
+    previewContent += `Type: ${data.type || "N/A"}\n`;
+    previewContent += `Calendar Preview: ${data.calendar_preview || "N/A"}\n`;
 
-  document.getElementById('preview-text').innerText = previewContent;
+    if (data.type === "project") { 
+      previewContent += `Tools: ${Array.isArray(data.tools) ? data.tools.join(", ") : "N/A"}\n`;
+      previewContent += `Missing Tools: ${Array.isArray(data.missing_tools) ? data.missing_tools.join(", ") : "N/A"}\n`;
+    }
 
+    // Display once
+    document.getElementById('preview-text').innerText = previewContent;
 
-
-
-  document.getElementById('preview-box').style.display = 'block';
-  status.innerText = "✅ Preview generated. Review below.";
-})
-.catch(err => {
-  console.error("Preview failed:", err);
-  status.innerText = "❌ Failed to generate preview.";
-});
+    // Show preview box
+    document.getElementById('preview-box').style.display = 'block';
+    status.innerText = "✅ Preview generated. Review below.";
+  })
+  .catch(err => {
+    console.error("Preview failed:", err);
+    status.innerText = "❌ Failed to generate preview.";
+  });
 }
 
 // Finalize the plan
@@ -69,10 +69,3 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
-
-
-
-
-
-
-

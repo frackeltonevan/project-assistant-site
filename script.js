@@ -23,15 +23,18 @@ function submitPrompt() {
   lastPayload = data;
   
   // disiplay plan preview
-  document.getElementById('preview-text').innerText = data.summary;
-  document.getElementById('preview-text').innerText = data.estimated_date;
-  document.getElementById('preview-text').innerText = data.calendar_preview;
-  document.getElementById('preview-text').innerText = data.type;
-  
-  if (data.type == "project") { 
-    document.getElementById('preview-text').innerText = data.tools;
-    document.getElementById('preview-text').innerText = data.missing_tools;
+  let previewContent = `Summary: ${data.summary}
+  Estimated Date: ${data.estimated_date}
+  Type: ${data.type}
+  Calendar Preview: ${data.calendar_preview}`;
+
+  if (data.type === "project") {
+    previewContent += `\nTools: ${data.tools.join(", ")}
+  Missing Tools: ${data.missing_tools.join(", ")}`;
   }
+
+// Display it all at once
+document.getElementById('preview-text').innerText = previewContent;
 
 
 
@@ -66,6 +69,7 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
 
 
 

@@ -29,10 +29,15 @@ function submitPrompt() {
     previewContent += `Type: ${data.type || "N/A"}\n`;
     previewContent += `Calendar Preview: ${data.calendar_preview || "N/A"}\n`;
 
-    if (data.type === "project") { 
-      previewContent += `Tools: ${Array.isArray(data.tools) ? data.tools.join(", ") : "N/A"}\n`;
-      previewContent += `Missing Tools: ${Array.isArray(data.missing_tools) ? data.missing_tools.join(", ") : "N/A"}\n`;
+    if (data.type === "project") {
+      previewContent += `\nTools:\n${Array.isArray(data.tools) 
+        ? data.tools.join("\n") 
+        : "N/A"}\n`;
+      previewContent += `Missing Tools: ${Array.isArray(data.missing_tools) 
+        ? data.missing_tools.join(", ") 
+        : "N/A"}`;
     }
+
 
     // Display once
     document.getElementById('preview-text').innerText = previewContent;
@@ -69,3 +74,4 @@ function confirmPlan() {
     status.innerText = "❌ Failed to confirm plan.";
   });
 }
+
